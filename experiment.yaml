@@ -4,6 +4,20 @@ description: The simple app service uses health.db to read its health status
 tags:
 - simpleapp
 - health
+secrets:
+  kubernetes:
+    KUBERNETES_CONTEXT: monitoringniko/api-crc-testing:6443/kube:admin
+configuration:
+  url: http://simpleapp-git-monitoringniko.apps-crc.testing/
+  tracing_provider: jaeger
+  tracing_host: 127.0.0.1
+  tracing_port: 6831
+  tracing_propagation: b3
+controls:
+- name: opentracing
+  provider:
+    type: python
+    module: chaostracing.control
 steady-state-hypothesis:
   title: App is healthy
   probes:
@@ -13,7 +27,7 @@ steady-state-hypothesis:
     - 200
     provider:
       type: http
-      url: http://simpleapp-git-monitoringniko.apps-crc.testing/healthy
+      url: "${url}/healthy"
       expected_status: 200
       timeout: 5
 method:
@@ -21,5 +35,19 @@ method:
   type: action
   provider:
     type: http
-    url: http://simpleapp-git-monitoringniko.apps-crc.testing/sethealthy?set=1
+    url: "${url}/sethealthy?set=1"
     expected_status: 200
+- type: action
+  name: terminate-db-pod
+  provider:
+    type: python
+    module: chaosk8s.pod.actions
+    func: terminate_pods
+    secrets": 
+      - kubernetes
+    arguments:
+      label_selector: app=simpleapp-git
+      rand: true
+      ns: monitoringniko
+  pauses:
+    after: 20
