@@ -3,14 +3,14 @@ import flask, time, os
 app = flask.Flask(__name__)
 
 def write_health(health):
-    f = open("health.db","w")
+    f = open("healthdb/health.db","w")
     f.write(health)
     f.close()
 
 def read_health():
-    if not os.path.exists("health.db"):
+    if not os.path.exists("healthdb/health.db"):
         write_health("1")
-    f = open("health.db","r")
+    f = open("healthdb/health.db","r")
     health = f.read()
     f.close()
     return health
