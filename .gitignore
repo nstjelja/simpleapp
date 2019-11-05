@@ -1,1 +1,4 @@
 venv/
+health.db
+journal.*
+chaostoolkit.log

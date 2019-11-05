@@ -2,8 +2,16 @@ import flask, time
 
 app = flask.Flask(__name__)
 
-global is_healthy
-is_healthy="1"
+def write_health(health):
+    f = open("health.db","w")
+    f.write(health)
+    f.close()
+
+def read_health():
+    f = open("health.db","r")
+    health = f.read()
+    f.close()
+    return health
 
 @app.route('/')
 def index():
@@ -11,8 +19,7 @@ def index():
 
 @app.route('/healthy')
 def healthy():
-    global is_healthy
-    print(is_healthy)
+    is_healthy = read_health()
     if is_healthy=="1":
         status=200
         msg = "yes"
@@ -23,8 +30,7 @@ def healthy():
 
 @app.route("/sethealthy",methods=['GET', 'POST'])
 def sethealthy():
-    global is_healthy
-    is_healthy=flask.request.args.get("set")
+    write_health(flask.request.args.get("set"))
     return "ok"
 
 @app.route('/ready')

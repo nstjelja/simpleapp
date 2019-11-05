@@ -1,0 +1,38 @@
+---
+title: Can the service be healthy is the health.db file is missing.
+description: The simple app service uses health.db to read its health status
+tags:
+- simpleapp
+- health
+steady-state-hypothesis:
+  title: App is healthy
+  probes:
+  - type: probe
+    name: service-is-aviable
+    tolerance:
+    - 200
+    provider:
+      type: http
+      url: http://localhost:5555/healthy
+      expected_status: 200
+      timeout: 5
+method:
+- name: move-exchange-file
+  type: action
+  provider:
+    type: python
+    module: os
+    func: rename
+    arguments:
+      src: "./health.db"
+      dst: "./health.db.old"
+rollbacks:
+- name: restore-health.db
+  type: action
+  provider:
+    type: python
+    module: os
+    func: rename
+    arguments:
+      src: "./health.db.old"
+      dst: "./health.db"
