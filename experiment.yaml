@@ -31,12 +31,6 @@ steady-state-hypothesis:
       expected_status: 200
       timeout: 5
 method:
-- name: set_healthy
-  type: action
-  provider:
-    type: http
-    url: "${url}/sethealthy?set=1"
-    expected_status: 200
 - type: action
   name: terminate-db-pod
   provider:
