@@ -1,4 +1,4 @@
-import flask, time
+import flask, time, os
 
 app = flask.Flask(__name__)
 
@@ -8,6 +8,8 @@ def write_health(health):
     f.close()
 
 def read_health():
+    if not os.path.exists("health.db"):
+        write_health("1")
     f = open("health.db","r")
     health = f.read()
     f.close()

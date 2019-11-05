@@ -2,3 +2,4 @@ venv/
 health.db
 journal.*
 chaostoolkit.log
+.DS_Store
