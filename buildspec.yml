@@ -6,4 +6,4 @@ phases:
       python: 3.8
   build:
     commands:
-    - make build
+    - make setup
