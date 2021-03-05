@@ -1,10 +1,10 @@
 .PHONY: setup
 setup:
-	pip install -r requirements.txt
+	pip3 install -r requirements.txt
 
 .PHONY: run
 run:
-	python app.py
+	python3 app.py
 
 .PHONY: drun
 drun:

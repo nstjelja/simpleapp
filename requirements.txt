@@ -1,6 +1,6 @@
-Flask==1.1.1
-chaostoolkit==1.3.0
-chaostoolkit-kubernetes==0.21.0
-chaostoolkit-lib==1.7.1
-chaostoolkit-opentracing==0.2.1
-chaostoolkit-reporting==0.13.0
+Flask
+chaostoolkit
+chaostoolkit-kubernetes
+chaostoolkit-lib
+chaostoolkit-opentracing
+chaostoolkit-reporting
