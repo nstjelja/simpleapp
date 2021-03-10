@@ -4,3 +4,5 @@ chaostoolkit-kubernetes
 chaostoolkit-lib
 chaostoolkit-opentracing
 chaostoolkit-reporting
+pytest
+python-mock

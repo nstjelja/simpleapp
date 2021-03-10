@@ -10,3 +10,7 @@ run:
 drun:
 	docker build -t simpleapp .
 	docker run -ti -p 5555:5555 simpleapp
+
+.PHONY: test
+test:
+	pytest -v --junitxml=report.xml
