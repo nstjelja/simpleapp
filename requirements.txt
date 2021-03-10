@@ -6,3 +6,4 @@ chaostoolkit-opentracing
 chaostoolkit-reporting
 pytest
 python-mock
+pytest-cov

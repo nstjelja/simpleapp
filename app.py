@@ -27,7 +27,7 @@ def healthy():
         msg = "yes"
     else:
         status=500
-        msg = "n"
+        msg = "no"
     return msg , status
 
 @app.route("/sethealthy",methods=['GET', 'POST'])

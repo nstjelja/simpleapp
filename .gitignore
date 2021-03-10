@@ -6,3 +6,5 @@ chaostoolkit.log
 .pytest_cache/
 report.xml
 __pycache__/
+coverage.xml
+.coverage

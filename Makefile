@@ -13,4 +13,4 @@ drun:
 
 .PHONY: test
 test:
-	pytest -v --junitxml=report.xml
+	pytest -v --junitxml=report.xml --cov=app --cov-report xml

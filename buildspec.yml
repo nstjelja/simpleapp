@@ -13,3 +13,7 @@ reports:
     files: 
       - report.xml
     file-format: "JUNITXML"
+  codecoverage:
+    files:
+      - coverage.xml
+    file-format: COBERTURAXML
