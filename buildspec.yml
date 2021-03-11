@@ -4,10 +4,21 @@ phases:
   install:
     runtime-versions:
       python: 3.8
+  pre_build:
+    commands:
+    - echo Logging into ecr
+    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
   build:
     commands:
+    - echo Build started on `date`
     - make setup
     - make test
+    - make buildci
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
 reports:
   unittest:
     files: 
