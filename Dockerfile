@@ -1,4 +1,4 @@
-FROM python:3.8.0
+FROM python:3.10.13
 WORKDIR /app
 EXPOSE 5555
 ADD requirements.txt requirements.txt
